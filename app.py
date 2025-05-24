@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 api = Api(app)
 
-client = pymongo.MongoClient("mongodb+srv://DenysDt:bGbPB4bFVK3L8MU@cluster0.1xcwxnh.mongodb.net/")
+client = pymongo.MongoClient("mongodb+srv://DenysDt:bGbPB4bFVK3L8MU@cluster0.1xcwxnh.mongodb.net/?retryWrites=true&w=majority")
 mydb = client["mydatabase"]
 myposts = mydb["posts"]
 
