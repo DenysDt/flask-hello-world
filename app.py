@@ -51,8 +51,8 @@ class login(Resource):
     def get(self):
         user = request.args.get('user')
         password = request.args.get('password')
-        if not myusers.find_one({"name": {"$eq": user}}):
-            user_retrieve = myusers.find_one({"_id": user})
+        if myusers.find_one({"name": {"$eq": user}}):
+            user_retrieve = myusers.find_one({"name": user})
             if password == user_retrieve["pass"]:
                 return jsonify(user_retrieve)
             else:
