@@ -44,5 +44,30 @@ class usercreate(Resource):
     def post(self):
         data = request.get_json()     # status code
         return jsonify({'data': data}), 201
+
+
+class login(Resource):
+
+    def get(self):
+        user = request.args.get('user')
+        password = request.args.get('password')
+        if myusers.find_one({"name": {"$eq": user}}):
+            user_retrieve = myuser.find_one({"_id": user})
+            if password == user_retrieve["pass"]:
+                return jsonify(user_retrieve)
+            else:
+                return jsonify({"message": "!pass"})
+        else:
+            return jsonify({"message": "!user"})
+            
+        return jsonify(found_post)
+
+    def post(self):
+        data = request.get_json()     # status code
+        return jsonify({'data': data}), 201
+
+
 api.add_resource(postsearch, '/post')
-api.add_resource(usercreate, "/user")
+api.add_resource(usercreate, "/signup")
+api.add_resource(login, "/login")
+
