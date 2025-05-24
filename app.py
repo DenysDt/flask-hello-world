@@ -37,12 +37,12 @@ class usercreate(Resource):
         mydata.update_one({"_id": "0"}, {"$set": {"userID": str(userID)}})
     def get(self):
         try:
-            nickname = request.args.get('user')
-            password = request.args.get('pass')
-            newUser(nickname, password, "nothing", False, 5, False, False, "white", False)
+            user = request.args.get('user')
+            password = request.args.get('password')
+            newUser(user, password, "nothing", False, 5, False, False, "white", False)
             return jsonify({"message": "success"})
         except Exception as e:
-            return jsonify({"message": "error"})
+            return jsonify({"message": "error", "reason": e})
     def post(self):
         data = request.get_json()     # status code
         return jsonify({'data': data}), 201
