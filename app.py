@@ -14,7 +14,7 @@ class Hello(Resource):
 
     def get(self):
         postid = request.args.get('postid')
-        found_post = myposts.find_one({"_id": postid})
+        found_post = myposts.find_one({"_id": int(postid)})
         return jsonify(found_post)
 
     def post(self):
