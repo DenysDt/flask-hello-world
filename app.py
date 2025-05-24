@@ -42,7 +42,7 @@ class usercreate(Resource):
             newUser(user, password, "nothing", False, 5, False, False, "white", False)
             return jsonify({"message": "success"})
         except Exception as e:
-            print(f"ERROR: {e}"
+            print(f"ERROR: {e}")
             return jsonify({"message": "error"})
     def post(self):
         data = request.get_json()     # status code
