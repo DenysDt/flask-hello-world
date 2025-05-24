@@ -16,7 +16,7 @@ data_retrieve = mydata.find_one({"_id": "0"})
 postID = int(data_retrieve["postID"])
 userID = int(data_retrieve["userID"])
 
-class postseach(Resource):
+class postsearch(Resource):
 
     def get(self):
         postid = request.args.get('postid')
