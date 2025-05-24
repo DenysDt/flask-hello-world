@@ -29,17 +29,14 @@ class postsearch(Resource):
 
 
 class usercreate(Resource):
-    
-    def newUser(nickname, password, description, isMod, rep, isBanned, isAdmin, nameColour, isTest):
-        global userID
-        myusers.insert_one({"_id": userID, "name": nickname, "pass": password, "desc": description, "mod": isMod, "rep": rep, "ban": isBanned, "admin": isAdmin, "namecol": nameColour, "test": isTest})
-        userID += 1
-        mydata.update_one({"_id": "0"}, {"$set": {"userID": str(userID)}})
     def get(self):
         try:
             user = request.args.get('user')
             password = request.args.get('password')
-            newUser(user, password, "nothing", False, 5, False, False, "white", False)
+            userID = int(data_retrieve["userID"])
+            myusers.insert_one({"_id": userID, "name": user, "pass": password, "desc": "bio", "mod": False, "rep": 5, "ban": False, "admin": False, "namecol": "white", "test": "False"})
+            userID += 1
+            mydata.update_one({"_id": "0"}, {"$set": {"userID": str(userID)}})
             return jsonify({"message": "success"})
         except Exception as e:
             print(f"ERROR: {e}")
