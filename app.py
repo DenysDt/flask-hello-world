@@ -65,8 +65,18 @@ class login(Resource):
         data = request.get_json()     # status code
         return jsonify({'data': data}), 201
 
+class health(Resource):
+
+    def get(self):
+        return "Hello!"
+
+    def post(self):
+        data = request.get_json()     # status code
+        return jsonify({'data': data}), 201
+
 
 api.add_resource(postsearch, '/post')
 api.add_resource(usercreate, "/signup")
 api.add_resource(login, "/login")
+api.add_resource(health, "/health")
 
