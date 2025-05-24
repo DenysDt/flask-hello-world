@@ -42,7 +42,8 @@ class usercreate(Resource):
             newUser(user, password, "nothing", False, 5, False, False, "white", False)
             return jsonify({"message": "success"})
         except Exception as e:
-            return jsonify({"message": "error", "reason": e})
+            print(f"ERROR: {e}"
+            return jsonify({"message": "error"})
     def post(self):
         data = request.get_json()     # status code
         return jsonify({'data': data}), 201
