@@ -2,4 +2,4 @@ Flask
 Gunicorn
 pymongo
 simplejson
-flask-rest
+flask-restful
