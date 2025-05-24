@@ -52,7 +52,7 @@ class login(Resource):
         user = request.args.get('user')
         password = request.args.get('password')
         if myusers.find_one({"name": {"$eq": user}}):
-            user_retrieve = myuser.find_one({"_id": user})
+            user_retrieve = myusers.find_one({"_id": user})
             if password == user_retrieve["pass"]:
                 return jsonify(user_retrieve)
             else:
@@ -60,7 +60,6 @@ class login(Resource):
         else:
             return jsonify({"message": "!user"})
             
-        return jsonify(found_post)
 
     def post(self):
         data = request.get_json()     # status code
