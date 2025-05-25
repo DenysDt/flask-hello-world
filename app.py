@@ -101,4 +101,5 @@ api.add_resource(postsearch, '/post')
 api.add_resource(usercreate, "/signup")
 api.add_resource(login, "/login")
 api.add_resource(health, "/health")
+api.add_resource(postcreate, "/postcreate")
 
