@@ -19,6 +19,7 @@ userID = int(data_retrieve["userID"])
 class postsearch(Resource):
 
     def get(self):
+        
         postid = request.args.get('postid')
         found_post = myposts.find_one({"_id": int(postid)})
         return jsonify(found_post)
@@ -30,6 +31,12 @@ class postsearch(Resource):
 
 class usercreate(Resource):
     def get(self):
+        client = pymongo.MongoClient("mongodb+srv://DenysDt:bGbPB4bFVK3L8MU@cluster0.1xcwxnh.mongodb.net/?retryWrites=true&w=majority")
+        mydb = client["mydatabase"]
+        myusers = mydb["users"]
+        mydata = mydb["data"]
+
+        data_retrieve = mydata.find_one({"_id": "0"})
         try:
             user = request.args.get('user')
             password = request.args.get('password')
@@ -78,6 +85,13 @@ class health(Resource):
 class postcreate(Resource):
 
     def get(self):
+        client = pymongo.MongoClient("mongodb+srv://DenysDt:bGbPB4bFVK3L8MU@cluster0.1xcwxnh.mongodb.net/?retryWrites=true&w=majority")
+        mydb = client["mydatabase"]
+        myposts = mydb["posts"]
+        myusers = mydb["users"]
+        mydata = mydb["data"]
+
+        data_retrieve = mydata.find_one({"_id": "0"})
         try:
             user = request.args.get('user')
             contents = request.args.get('contents')
