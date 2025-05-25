@@ -75,6 +75,28 @@ class health(Resource):
         return jsonify({'data': data}), 201
 
 
+class postcreate(Resource):
+
+    def get(self):
+        try:
+            user = request.args.get('user')
+            contents = request.args.get('contents')
+            postID = int(data_retrieve["postID"])
+            myposts.insert_one({"_id": postID, "contents": contents, "user": user})
+            postID += 1
+            mydata.update_one({"_id": "0"}, {"$set": {"postID": str(postID)}})
+            return jsonify({"message": "success"})
+
+        except Exception as e:
+            print(f"ERROR: {e}")
+            return jsonify({"message": "error"})
+
+    def post(self):
+        data = request.get_json()     # status code
+        return jsonify({'data': data}), 201
+
+
+
 api.add_resource(postsearch, '/post')
 api.add_resource(usercreate, "/signup")
 api.add_resource(login, "/login")
