@@ -96,10 +96,18 @@ class postcreate(Resource):
             user = request.args.get('user')
             contents = request.args.get('contents')
             postID = int(data_retrieve["postID"])
-            myposts.insert_one({"_id": postID, "contents": contents, "user": user})
-            postID += 1
-            mydata.update_one({"_id": "0"}, {"$set": {"postID": str(postID)}})
-            return jsonify({"message": "success"})
+            userpass = request.args.get('password')
+            if myusers.find_one({"name": {"$eq": user}}):
+                user_retrieve = myusers.find_one({"name": user})
+                if userpass == user_retrieve["pass"]:
+                    myposts.insert_one({"_id": postID, "contents": contents, "user": user})
+                    postID += 1
+                    mydata.update_one({"_id": "0"}, {"$set": {"postID": str(postID)}})
+                    return jsonify({"message": "success"})
+                else:
+                    return jsonify({"message": "!pass"})
+            else:
+                return jsonify({"message": "!user"})
 
         except Exception as e:
             print(f"ERROR: {e}")
