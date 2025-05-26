@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from flask_restful import Resource, Api
 import pymongo
 
@@ -117,6 +117,13 @@ class freejob(Resource):
     def post(self):
         data = request.get_json()     # status code
         return jsonify({'data': data}), 201
+
+
+@app.route("/")
+def index():
+    return render_template("aperture.html")
+
+
 
 api.add_resource(postsearch, '/post')
 api.add_resource(usercreate, "/signup")
