@@ -3,3 +3,4 @@ Gunicorn
 pymongo
 simplejson
 flask-restful
+uuid
