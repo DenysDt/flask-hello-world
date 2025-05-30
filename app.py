@@ -127,17 +127,83 @@ class freejob(Resource):
         return jsonify({'data': data}), 201
 
 
+
+class preBattleShipsRequest(Resource):
+
+    def get(self):
+        client = pymongo.MongoClient("mongodb+srv://DenysDt:bGbPB4bFVK3L8MU@cluster0.1xcwxnh.mongodb.net/?retryWrites=true&w=majority")
+        mydb = client["mydatabase"]
+        mybattles = client["battles"]
+
+        #data_retrieve = mydata.find_one({"_id": "0"})
+        try:
+            ships = request.args.get('ships')
+            battleid = request.args.get("battleid")
+            playerid = request.args.get("playerid")
+            amount = ships.count(",")
+            x = ships.partition(",")
+            xlen = len(x[0])
+            if xlen != 2:
+                print(f"Error! Square {x[0]} doesn't exist!")
+                return jsonify({"message": "error"})
+            else:
+                if x[0][0] == "A" or x[0][0] == "B" or x[0][0] == "C" or x[0][0] == "D":
+                    if x[0][1] == "1" or x[0][1] == "2" or x[0][1] == "3" or x[0][1] == "4":
+                        ...
+                    else:
+                        print(f"Error! Square {x[0]} doesn't exist!")
+                        return jsonify({"message": "error"})
+                else:
+                    print(f"Error! Square {x[0]} doesn't exist!")
+                    return jsonify({"message": "error"})
+
+            
+
+            for loop in range(amount):
+                x = x[2].partition(",")
+                xlen = len(x[0])
+                if xlen != 2:
+                    print(f"Error! Square {x[0]} doesn't exist!")
+                    return jsonify({"message": "error"})
+                else:
+                    if x[0][0] == "A" or x[0][0] == "B" or x[0][0] == "C" or x[0][0] == "D":
+                        if x[0][1] == "1" or x[0][1] == "2" or x[0][1] == "3" or x[0][1] == "4":
+                            ...
+                        else:
+                            print(f"Error! Square {x[0]} doesn't exist!")
+                            return jsonify({"message": "error"})
+                    else:
+                        print(f"Error! Square {x[0]} doesn't exist!")
+                        return jsonify({"message": "error"})
+
+                if true:
+                    ...
+                mybattles.update_one({"_id": battleid}, {"$set": {x[0]: str(postID)}})
+
+            return jsonify({"message": "success"})
+
+
+        except Exception as e:
+            print(f"ERROR: {e}")
+            return jsonify({"message": "error"})
+
+    def post(self):
+        data = request.get_json()     # status code
+        return jsonify({'data': data}), 201
+
+
+
+
 @app.route("/")
 def index():
     return render_template("aperture.html")
 
 
-
-api.add_resource(postsearch, '/post')
-api.add_resource(usercreate, "/signup")
-api.add_resource(login, "/login")
 api.add_resource(health, "/health")
-api.add_resource(postcreate, "/postcreate")
-api.add_resource(freejob, "/freejob")
+#api.add_resource(postsearch, '/post')
+#api.add_resource(usercreate, "/signup")
+#api.add_resource(login, "/login")
+#api.add_resource(postcreate, "/postcreate")
+#api.add_resource(freejob, "/freejob")
 
 
