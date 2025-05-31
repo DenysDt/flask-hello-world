@@ -197,8 +197,8 @@ class battlejoin(Resource):
                     userid_gen = str(uuid.uuid4())
                     players_count = battle_data["players"]
                     players_count += 1
-                    mydata.update_one({"_id": battleid}, {"$set": {"players": players_count}})
-                    mydata.update_one({"_id": battleid}, {"$set": {"player1": userid_gen}})
+                    mybattles.update_one({"_id": battleid}, {"$set": {"players": players_count}})
+                    mybattles.update_one({"_id": battleid}, {"$set": {"player1": userid_gen}})
                     return jsonify({"message": "success", "gen_userid": userid_gen})
                 elif battle_data["players"] == 1:
                     userid_gen = str(uuid.uuid4())
