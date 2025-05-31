@@ -154,7 +154,8 @@ class preBattleShipsRequest(Resource):
                 if squares_info["squares"][x[0]][playerid] == "false":
                     mybattles.update_one({"_id": battleid}, {"$set": {x[0]: {playerid: "true"}}})
             else:
-                return jsonify({"message": "error"})
+                print(x[0])
+                return jsonify({"message": "!square"})
 
             for loop in range(amount):
                 x = x[2].partition("-")
