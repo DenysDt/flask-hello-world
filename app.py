@@ -148,8 +148,8 @@ class preBattleShipsRequest(Resource):
             battleid = request.args.get("battleid")
             playerid = request.args.get("playerid")
             squares_info = mybattles.find_one({"_id": battleid})
-            amount = ships.count(",")
-            x = ships.partition(",")
+            amount = ships.count("-")
+            x = ships.partition("-")
             if mybattles.find_one({"squares": {"$eq": x[0]}}):
                 if squares_info["squares"][x[0]][playerid] == "false":
                     mybattles.update_one({"_id": battleid}, {"$set": {x[0]: {playerid: "true"}}})
@@ -157,7 +157,7 @@ class preBattleShipsRequest(Resource):
                 return jsonify({"message": "error"})
 
             for loop in range(amount):
-                x = x[2].partition(",")
+                x = x[2].partition("-")
 
                 if mybattles.find_one({"squares": {"$eq": x[0]}}):
                     if squares_info["squares"][x[0]][playerid] == "false":
@@ -196,15 +196,15 @@ class battlejoin(Resource):
                     userid_gen = str(uuid.uuid4())
                     players_count = battle_data["players"]
                     players_count += 1
-                    mydata.update_one({"_id": battleid}, {"$set": {"players": players_count}})
-                    mydata.update_one({"_id": battleid}, {"$set": {"player1": userid_gen}})
+                    mybattles.update_one({"_id": battleid}, {"$set": {"players": players_count}})
+                    mybattles.update_one({"_id": battleid}, {"$set": {"player1": userid_gen}})
                     return jsonify({"message": "success", "gen_userid": userid_gen})
                 elif battle_data["players"] == 1:
                     userid_gen = str(uuid.uuid4())
                     players_count = battle_data["players"]
                     players_count += 1
-                    mydata.update_one({"_id": battleid}, {"$set": {"players": players_count}})
-                    mydata.update_one({"_id": battleid}, {"$set": {"player2": userid_gen}})
+                    mybattles.update_one({"_id": battleid}, {"$set": {"players": players_count}})
+                    mybattles.update_one({"_id": battleid}, {"$set": {"player2": userid_gen}})
                     return jsonify({"message": "success", "gen_userid": userid_gen})
 
                 else:
