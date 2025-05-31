@@ -210,6 +210,10 @@ class battlejoin(Resource):
 
                 else:
                     return jsonify({"message": "!full"})
+                
+                
+        else:
+            return jsonify({"message": "!code"})
 
 
     def post(self):
