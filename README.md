@@ -1,9 +1,3 @@
-# README
+Extremely old code, used for personal reference only.
 
-This is the [Flask](http://flask.pocoo.org/) [quick start](http://flask.pocoo.org/docs/1.0/quickstart/#a-minimal-application) example for [Render](https://render.com).
-
-The app in this repo is deployed at [https://flask.onrender.com](https://flask.onrender.com).
-
-## Deployment
-
-Follow the guide at https://render.com/docs/deploy-flask.
+(yes ik that passing such stuff as username through url arguments is a bad idea, it was fixed in another project.)
